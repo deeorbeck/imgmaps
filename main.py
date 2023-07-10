@@ -16,7 +16,7 @@ x_min =  55.998219
 lon = x_min
 lat = y_max
 
-for zoom in range(20):
+for zoom in range(11, 20):
 
     x_ind_min, y_ind_min, zoom = mercantile.tile(x_min, y_max, zoom)
     x_ind_max, y_ind_max, zoom = mercantile.tile(x_max, y_min, zoom)
@@ -42,8 +42,8 @@ for zoom in range(20):
             file_name = f"{y}.png"
             file_path = os.path.join(x_dir, file_name)
             if file_name in os.listdir(x_dir):
-                _image = Image.open(file_path)
-                x_images.append(_image)
+#                _image = Image.open(file_path)
+#                x_images.append(_image)
                 continue
             url = url_template.format(zoom, x, y)
             print(url)
@@ -51,14 +51,14 @@ for zoom in range(20):
             r= requests.get(url.strip(), headers=headers, timeout=10)
             with open(file_path, 'wb') as f:
                 f.write(r.content)
-            _image = Image.open(file_path)
-            x_images.append(_image)
+#            _image = Image.open(file_path)
+#            x_images.append(_image)
         images[x] = x_images
 
 
 
 
-
+    _image = Image.open("images/0/0/0.png")
     new_image = Image.new('RGB',(x_length*_image.size[0], y_length*_image.size[1]), (250,250,250))
     x_co = 0
     for _x in images.keys():
