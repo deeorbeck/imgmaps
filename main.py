@@ -15,8 +15,8 @@ x_min =  55.998219
 
 lon = x_min
 lat = y_max
-
-for zoom in range(11, 20):
+print("Run")
+for zoom in range(12, 13):
 
     x_ind_min, y_ind_min, zoom = mercantile.tile(x_min, y_max, zoom)
     x_ind_max, y_ind_max, zoom = mercantile.tile(x_max, y_min, zoom)
@@ -33,7 +33,7 @@ for zoom in range(11, 20):
     y_length = y_ind_max - y_ind_min + 1
 
     images = {}
-    for x in range(x_ind_min, x_ind_max + 1):
+    for x in range(2879, x_ind_max + 1):
         x_dir = os.path.join(zoom_dir, str(x))
         if not str(x) in os.listdir(zoom_dir):
             os.mkdir(x_dir)
