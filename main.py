@@ -50,6 +50,11 @@ for x in range(x_ind_min, x_ind_max + 1):
         file_path = os.path.join(x_dir, file_name)
         headers={'User-Agent': 'M'}
         r= requests.get(url.strip(), headers=headers, timeout=10)
+        while r.status_code != 200:
+            r = requests.get(url.strip(), headers=headers, timeout=10)
+            print("Reconnecting...", end="\r")
+            if r.status_code == 200: 
+                 print("\n\n\nConnected!")
         with open(file_path, 'wb') as f:
             f.write(r.content)
     print(f"X: {x}: Done!")
