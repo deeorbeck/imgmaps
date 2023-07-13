@@ -32,7 +32,7 @@ if not zoom in os.listdir(dirname):
     os.mkdir(zoom_dir)
 xs = os.listdir(zoom_dir)
 if xs:
-    x_ind_min = int(xs[-1])
+    x_ind_min = max([int(x_) for x_ in xs ])
 x_length = x_ind_max - x_ind_min + 1
 y_length = y_ind_max - y_ind_min + 1
 print("Running...")
@@ -42,7 +42,7 @@ for x in range(x_ind_min, x_ind_max + 1):
         os.mkdir(x_dir)
     ys = os.listdir(x_dir)
     if ys:
-        y_ind_min = int(ys[-1].replace('.png', ''))
+        y_ind_min = max([int(y_.replace('.png', '')) for y_ in ys])
         print(y_ind_min)
     for y in range(y_ind_min, y_ind_max + 1):
         url = url_template.format(zoom, x, y)
